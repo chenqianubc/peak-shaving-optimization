@@ -5,7 +5,7 @@ using XLSX
 xf = XLSX.readxlsx("tra.xlsx")
 Profile_P = xf["P and M profiles"]["B2:B96"]
 Profile_M = xf["P and M profiles"]["C2:C96"]
-D4 = xf["Demand variations"]["B1:G49"] #145 variables
+D4 = xf["Demand variations"]["B1:G49"] 
 w1= 1; #w1 is the weight of two objectives, which can be adjusted
 # the unit of flow rate is kg/s, the unit used in paper is 104m3/d
 e1 = 0.35;
@@ -119,7 +119,7 @@ arr1*(aa1+dd1/293)*(den[4,j,k]^6) +(cc1*(den[4,j,k]^3)/(293^2))*(1+rr1*(den[4,j,
 
 @NLconstraint(gp, [j=1:nt, k=1:ns], den[4,j,k]*Rm*(293)*Z[4,j,k]==P[68,j,k])
 #----------------------Nodes-------------------------
-@NLconstraint(gp, lam+2*log10(Ke/3.7/d)==0) #equation of the friction factor
+@NLconstraint(gp, lam+2*log10(Ke/3.7/d)==0) #equation of the friction factor, actual lam=1/(lam^2)
 
 #CS1 Pin=5000KPa,Tin=293K,Z=0.9082
 @NLconstraint(gp,[j=1:nt, k=1:ns],(M[1,j,k]/(2.2599*ZMui)/4)*8000-1.79615*rspeed1[j,k]>=0)
